@@ -9,6 +9,6 @@ import java.util.List;
 public class OffersDaoResponse {
     private String respCode;
     private String respMsg;
-    private List<OfferDetailsDao> offerRepositoryList;
+    private List<OfferDetailsDao> offerDaoList;
 
 }

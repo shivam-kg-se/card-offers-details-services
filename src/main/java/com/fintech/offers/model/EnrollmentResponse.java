@@ -9,4 +9,6 @@ public class EnrollmentResponse {
     private boolean isEnrolled;
     private String status;
     private String typeOfCard;
+
+
 }

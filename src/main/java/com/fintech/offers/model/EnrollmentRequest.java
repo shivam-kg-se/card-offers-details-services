@@ -7,5 +7,4 @@ public class EnrollmentRequest {
     private String cardNumber;
     private String clientId;
     private String correlationId;
-//    private String message;
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class OfferDetailsDao {
+    public OfferDetails offerDeatialsDao;
     private String offerId;
     private String offerName;
     private String imageUrl;
