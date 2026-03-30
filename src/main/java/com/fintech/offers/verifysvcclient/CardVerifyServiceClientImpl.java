@@ -11,6 +11,7 @@ public class CardVerifyServiceClientImpl implements  ICardVerifyServiceClient {
 
     @Override
     public CardVerifyResponse verifyCard(CardVerifyRequest cardVerifyRequest) {
+
         return null;
     }
 }

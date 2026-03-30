@@ -9,8 +9,9 @@ public class OffersRequestBuilder {
     public EnrollmentRequest buildEnrollmentRequest(OffersRequest offersRequest) {
 //  1. prepare the EnrollmentRequest with the help of offerRequest
         EnrollmentRequest enrollmentRequest = new EnrollmentRequest();
-//        enrollmentRequest.setCardNumber(offersRequest.getCardNum());
-//        offersRequest.setCorrelationId(offersRequest.getCorrelationId());
+
+        enrollmentRequest.setCardNumber(offersRequest.getCardNum());
+        offersRequest.setCorrelationId(offersRequest.getCorrelationId());
 //
 
         return enrollmentRequest;

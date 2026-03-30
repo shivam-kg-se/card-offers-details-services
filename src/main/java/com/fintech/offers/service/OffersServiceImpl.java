@@ -76,6 +76,6 @@ public class OffersServiceImpl implements  IOffersService{
 //        7. call dao and get the response
 //        8. prepare the offer response
    */
-          return null;
+          return offersResponse;
     }
 }
