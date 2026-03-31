@@ -1,9 +1,6 @@
 package com.fintech.offers.dao;
 
-import com.fintech.offers.model.OfferDetails;
-import com.fintech.offers.model.OfferDetailsDao;
-import com.fintech.offers.model.OffersDaoRequest;
-import com.fintech.offers.model.OffersDaoResponse;
+import com.fintech.offers.model.*;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -86,8 +83,8 @@ public class MOffersDaoImpl implements IOffersDao {
         offerDaoList.add(offerDetailsDao5);
 
 
-        offersDaoResponse.setRespCode("0");
-        offersDaoResponse.setRespMsg("success");
+        offersDaoResponse.setRespCode(dbRespCode);
+        offersDaoResponse.setRespMsg(dbRespMsg);
         offersDaoResponse.setOfferDaoList(offerDaoList);
 
 

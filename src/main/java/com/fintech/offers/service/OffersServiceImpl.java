@@ -7,7 +7,6 @@ import com.fintech.offers.enrollment.svcclient.IEnrollmentServiceClient;
 import com.fintech.offers.model.*;
 import com.fintech.offers.verifysvcclient.ICardVerifyServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,7 +59,7 @@ public class OffersServiceImpl implements  IOffersService{
 //     10. apply business logic in dao respose
 
 //     11. prepare the offers response
-              OffersResponse offersResponse =  responseBuilder.buidOfferResponse(offersDaoResponse, cardVerifyResponse, enrollmentResponse);
+              OffersResponse offersResponse =  responseBuilder.buildOfferResponse(offersDaoResponse, cardVerifyResponse, enrollmentResponse);
 
 /**
 //        3. call enrollment serviceClient and get the response
@@ -75,7 +74,12 @@ public class OffersServiceImpl implements  IOffersService{
 //        6. prepare the request for dao/ repository
 //        7. call dao and get the response
 //        8. prepare the offer response
+
    */
+          StatusBlock statusBlock = new StatusBlock();
+          statusBlock.setRespCode(offersDaoResponse.getRespCode());
+          statusBlock.setRespMsg(offersDaoResponse.getRespMsg());
+          offersResponse.setStatusBlock(statusBlock);
           return offersResponse;
     }
 }

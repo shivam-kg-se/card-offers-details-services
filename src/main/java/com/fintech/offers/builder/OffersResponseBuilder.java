@@ -16,7 +16,8 @@ public class OffersResponseBuilder {
      * @param enrollmentResponse
      * @return
      */
-    public OffersResponse buidOfferResponse(OffersDaoResponse offersDaoResponse, CardVerifyResponse cardVerifyResponse, EnrollmentResponse enrollmentResponse) {
+
+    public OffersResponse buildOfferResponse(OffersDaoResponse offersDaoResponse, CardVerifyResponse cardVerifyResponse, EnrollmentResponse enrollmentResponse) {
        OffersResponse offersResponse = new OffersResponse();
         List<OfferDetails> offersList = new ArrayList<>();
 
@@ -34,6 +35,14 @@ public class OffersResponseBuilder {
 
        }
        offersResponse.setOffersDetails(offersList);
+        return offersResponse;
+    }
+    public OffersResponse buildOfferResponse(String respCode, String respMessage) {
+        StatusBlock statusBlock = new StatusBlock();
+        statusBlock.setRespMsg(respMessage);
+        statusBlock.setRespCode(respCode);
+        OffersResponse offersResponse = new OffersResponse();
+        offersResponse.setStatusBlock(statusBlock);
         return offersResponse;
     }
 }
