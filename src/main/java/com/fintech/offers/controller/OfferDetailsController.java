@@ -1,11 +1,15 @@
 package com.fintech.offers.controller;
 
 
+import com.fintech.offers.exception.BusinessException;
 import com.fintech.offers.exception.OffersInvalidRequestDataException;
+import com.fintech.offers.exception.SystemException;
 import com.fintech.offers.model.OffersRequest;
 import com.fintech.offers.model.OffersResponse;
 import com.fintech.offers.service.IOffersService;
 import com.fintech.offers.validator.OfferDetailsValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class OfferDetailsController {
 
 
+    private static final Logger logger = LoggerFactory.getLogger(OfferDetailsController.class);
     @Autowired
     OfferDetailsValidator offerDetailsValidator;
     @Autowired
@@ -40,6 +45,7 @@ public class OfferDetailsController {
                             @RequestHeader(name = "authToken",required = false)String authToken
                             ) throws OffersInvalidRequestDataException {
 
+        logger.debug("getoffer");
         OffersRequest offersRequest = new OffersRequest();
         offersRequest.setCardNum(cardNum);
         offersRequest.setClientId(clientId);
@@ -55,10 +61,17 @@ public class OfferDetailsController {
 //  2. prepare the request for service laye
 
 //  3. call the service layer and get the response
-        OffersResponse offersResponse = offersService.getOffers(offersRequest);
+
+        OffersResponse offersResponse = null;
+        try {
+            offersResponse = offersService.getOffers(offersRequest);
+        } catch (BusinessException e) {
+            throw new RuntimeException(e);
+        } catch (SystemException e) {
+            throw new RuntimeException(e);
+        }
 
 
-
-    return offersResponse;
+        return offersResponse;
     }
 }

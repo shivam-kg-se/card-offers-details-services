@@ -1,18 +1,21 @@
 package com.fintech.offers.dao;
 
+import com.fintech.offers.exception.BusinessException;
+import com.fintech.offers.exception.OffersInvalidRequestDataException;
+import com.fintech.offers.exception.SystemException;
 import com.fintech.offers.model.*;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import java.awt.image.ImageConsumer;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @Primary
 public class MOffersDaoImpl implements IOffersDao {
+
     @Override
-    public OffersDaoResponse getOffers(OffersDaoRequest offersRequest) {
+    public OffersDaoResponse getOffers(OffersDaoRequest offersRequest) throws BusinessException, SystemException{
 
 //        1. get the request from services
 //        2. prepare the request for database
@@ -21,74 +24,83 @@ public class MOffersDaoImpl implements IOffersDao {
 
         String dbRespCode="0";
         String dbRespMsg="success";
+
         OffersDaoResponse offersDaoResponse=new OffersDaoResponse();
         List<OfferDetailsDao> offerDaoList=new ArrayList<>();
 
+        if("0".equals(dbRespCode)) {
+            OfferDetailsDao offerDetailsDao1 = new OfferDetailsDao();
 
-        OfferDetailsDao offerDetailsDao1=new OfferDetailsDao();
-
-        offerDetailsDao1.setOfferId("9000001");
-        offerDetailsDao1.setOfferName("apple 15x");
-        offerDetailsDao1.setImageUrl("https://s3.amazon.com:8080/apple.png");
-        offerDetailsDao1.setDesc("good");
-        offerDetailsDao1.setDate("12-12-2026");
-        offerDetailsDao1.setStatus("active");
-
-
-
-        OfferDetailsDao offerDetailsDao2=new OfferDetailsDao();
-
-        offerDetailsDao2.setOfferId("9000001");
-        offerDetailsDao2.setOfferName("apple 15x");
-        offerDetailsDao2.setImageUrl("https://s3.amazon.com:8080/apple.png");
-        offerDetailsDao2.setDesc("good");
-        offerDetailsDao2.setDate("12-12-2026");
-        offerDetailsDao2.setStatus("active");
+            offerDetailsDao1.setOfferId("9000001");
+            offerDetailsDao1.setOfferName("apple 15x");
+            offerDetailsDao1.setImageUrl("https://s3.amazon.com:8080/apple.png");
+            offerDetailsDao1.setDesc("good");
+            offerDetailsDao1.setDate("12-12-2026");
+            offerDetailsDao1.setStatus("active");
 
 
-        OfferDetailsDao offerDetailsDao3=new OfferDetailsDao();
+            OfferDetailsDao offerDetailsDao2 = new OfferDetailsDao();
 
-        offerDetailsDao3.setOfferId("9000001");
-        offerDetailsDao3.setOfferName("apple 15x");
-        offerDetailsDao3.setImageUrl("https://s3.amazon.com:8080/apple.png");
-        offerDetailsDao3.setDesc("good");
-        offerDetailsDao3.setDate("12-12-2026");
-        offerDetailsDao3.setStatus("active");
-
-
-        OfferDetailsDao offerDetailsDao4=new OfferDetailsDao();
-
-        offerDetailsDao4.setOfferId("9000001");
-        offerDetailsDao4.setOfferName("apple 15x");
-        offerDetailsDao4.setImageUrl("https://s3.amazon.com:8080/apple.png");
-        offerDetailsDao4.setDesc("good");
-        offerDetailsDao4.setDate("12-12-2026");
-        offerDetailsDao4.setStatus("active");
+            offerDetailsDao2.setOfferId("9000001");
+            offerDetailsDao2.setOfferName("apple 15x");
+            offerDetailsDao2.setImageUrl("https://s3.amazon.com:8080/apple.png");
+            offerDetailsDao2.setDesc("good");
+            offerDetailsDao2.setDate("12-12-2026");
+            offerDetailsDao2.setStatus("active");
 
 
-        OfferDetailsDao offerDetailsDao5=new OfferDetailsDao();
+            OfferDetailsDao offerDetailsDao3 = new OfferDetailsDao();
 
-        offerDetailsDao5.setOfferId("9000001");
-        offerDetailsDao5.setOfferName("apple 15x");
-        offerDetailsDao5.setImageUrl("https://s3.amazon.com:8080/apple.png");
-        offerDetailsDao5.setDesc("good");
-        offerDetailsDao5.setDate("12-12-2026");
-        offerDetailsDao5.setStatus("active");
-
-
-        offerDaoList.add(offerDetailsDao1);
-        offerDaoList.add(offerDetailsDao2);
-        offerDaoList.add(offerDetailsDao3);
-        offerDaoList.add(offerDetailsDao4);
-        offerDaoList.add(offerDetailsDao5);
+            offerDetailsDao3.setOfferId("9000001");
+            offerDetailsDao3.setOfferName("apple 15x");
+            offerDetailsDao3.setImageUrl("https://s3.amazon.com:8080/apple.png");
+            offerDetailsDao3.setDesc("good");
+            offerDetailsDao3.setDate("12-12-2026");
+            offerDetailsDao3.setStatus("active");
 
 
-        offersDaoResponse.setRespCode(dbRespCode);
-        offersDaoResponse.setRespMsg(dbRespMsg);
-        offersDaoResponse.setOfferDaoList(offerDaoList);
+            OfferDetailsDao offerDetailsDao4 = new OfferDetailsDao();
+
+            offerDetailsDao4.setOfferId("9000001");
+            offerDetailsDao4.setOfferName("apple 15x");
+            offerDetailsDao4.setImageUrl("https://s3.amazon.com:8080/apple.png");
+            offerDetailsDao4.setDesc("good");
+            offerDetailsDao4.setDate("12-12-2026");
+            offerDetailsDao4.setStatus("active");
 
 
+            OfferDetailsDao offerDetailsDao5 = new OfferDetailsDao();
 
-        return  offersDaoResponse;
+            offerDetailsDao5.setOfferId("9000001");
+            offerDetailsDao5.setOfferName("apple 15x");
+            offerDetailsDao5.setImageUrl("https://s3.amazon.com:8080/apple.png");
+            offerDetailsDao5.setDesc("good");
+            offerDetailsDao5.setDate("12-12-2026");
+            offerDetailsDao5.setStatus("active");
+
+
+            offerDaoList.add(offerDetailsDao1);
+            offerDaoList.add(offerDetailsDao2);
+            offerDaoList.add(offerDetailsDao3);
+            offerDaoList.add(offerDetailsDao4);
+            offerDaoList.add(offerDetailsDao5);
+
+            offersDaoResponse.setRespCode(dbRespCode);
+            offersDaoResponse.setRespMsg(dbRespMsg);
+            offersDaoResponse.setOfferDaoList(offerDaoList);
+        }
+
+
+        else if ("100".equals(dbRespCode)|| "101".equals(dbRespCode)||"102".equals(dbRespCode)) {
+            throw new BusinessException(dbRespCode,dbRespMsg);
+        }
+        else if  ("111".equals(dbRespCode)|| "112".equals(dbRespCode)||"113".equals(dbRespCode)) {
+            throw new SystemException(dbRespCode,dbRespMsg);
+        }
+        else {
+            throw new SystemException("999", "Unknown DB error");
+        }
+        return offersDaoResponse;
+
     }
 }

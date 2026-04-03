@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class BusinessException extends Exception {
+public class BusinessException extends  Exception{
 
 //    serialVersionUID is unique version id used in java serialization
 //    serialization - change java object into byte stream

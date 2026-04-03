@@ -4,6 +4,8 @@ import com.fintech.offers.builder.OffersRequestBuilder;
 import com.fintech.offers.builder.OffersResponseBuilder;
 import com.fintech.offers.dao.IOffersDao;
 import com.fintech.offers.enrollment.svcclient.IEnrollmentServiceClient;
+import com.fintech.offers.exception.BusinessException;
+import com.fintech.offers.exception.SystemException;
 import com.fintech.offers.model.*;
 import com.fintech.offers.verifysvcclient.ICardVerifyServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class OffersServiceImpl implements  IOffersService{
 
 
     @Override
-    public OffersResponse getOffers(OffersRequest offersRequest) {
+    public OffersResponse getOffers(OffersRequest offersRequest) throws BusinessException, SystemException {
 
 //        1. get the request from controller layer
 
@@ -54,7 +56,9 @@ public class OffersServiceImpl implements  IOffersService{
           OffersDaoRequest offersDaoRequest =   requestBuilder.buildDaoRequest(offersRequest);
 
 //     9. call dao by sending offersDaoRequest and get the offerdaoResponse
-           OffersDaoResponse offersDaoResponse =   offersDao.getOffers(offersDaoRequest);
+
+       OffersDaoResponse offersDaoResponse = offersDao.getOffers(offersDaoRequest);
+
 
 //     10. apply business logic in dao respose
 

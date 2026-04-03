@@ -7,6 +7,7 @@ import com.fintech.offers.exception.SystemException;
 import com.fintech.offers.model.OffersDaoRequest;
 import com.fintech.offers.model.OffersResponse;
 import com.fintech.offers.model.StatusBlock;
+import com.fintech.offers.util.OfferDetailsConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,8 +21,9 @@ public class OfferDetialsControllerAdvice {
     @Autowired
     OffersResponseBuilder offersResponseBuilder;
 
+
+    //    @ResponseBody //__1way
     @ExceptionHandler(OffersInvalidRequestDataException.class)
-    @ResponseBody //__1way
     public OffersResponse handleRequestInvalidDataException(OffersInvalidRequestDataException exception){
 
 //        OffersResponse offersResponse = new OffersResponse();
@@ -39,46 +41,22 @@ public class OfferDetialsControllerAdvice {
     }
 
 // yaha tak shoet kar diya code
+
+
     @ExceptionHandler(BusinessException.class)
-    public OffersResponse handleRequestInvalidDataException(BusinessException exception){
-
-        OffersResponse offersResponse = new OffersResponse();
-        StatusBlock statusBlock = new StatusBlock();
-
-        statusBlock.setRespCode(exception.getRespCode());
-        statusBlock.setRespMsg(exception.getRespMessage());
-        offersResponse.setStatusBlock(statusBlock);
-
-
-        return offersResponse;
+    public OffersResponse handleBusinessInvalidDataException(BusinessException exception){
+        return offersResponseBuilder.buildOfferResponse(exception.getRespCode(),exception.getRespMessage());
     }
 
 
     @ExceptionHandler(SystemException.class)
-    public OffersResponse handleRequestInvalidDataException(SystemException exception){
-
-        OffersResponse offersResponse = new OffersResponse();
-        StatusBlock statusBlock = new StatusBlock();
-
-        statusBlock.setRespCode(exception.getRespCode());
-        statusBlock.setRespMsg(exception.getRespMessage());
-        offersResponse.setStatusBlock(statusBlock);
-
-
-        return offersResponse;
+    public OffersResponse handleSystemInvalidDataException(SystemException exception){
+        return offersResponseBuilder.buildOfferResponse(exception.getRespCode(),exception.getRespMessage());
     }
-
 
     @ExceptionHandler(Exception.class)
-    public OffersResponse handleRequestInvalidDataException(Exception exception){
-
-        OffersResponse offersResponse = new OffersResponse();
-        StatusBlock statusBlock = new StatusBlock();
-
-        statusBlock.setRespCode("888888888");
-        statusBlock.setRespMsg("unknown from database");
-        offersResponse.setStatusBlock(statusBlock);
-
-        return offersResponse;
+    public OffersResponse handleGenericInvalidDataException(Exception exception){
+        return offersResponseBuilder.buildOfferResponse(OfferDetailsConstant.GENERIC_ERROR_CODE,OfferDetailsConstant.GENERIC_ERROR_MSG);
     }
+
 }
